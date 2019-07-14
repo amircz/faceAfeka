@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Multiplayer Flappy Bird</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <style>
+        canvas {
+            border: 1px solid #d3d3d3;
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+
+<body onload="startGame()">
+    <div id="info">
+        <div id="input">
+            <p color="red">Enter your name</p>
+            <input type="text" id="name">
+            <button id="accept" onclick="getReady()">OK</button>
+            <br>
+            <br>
+            <button id="invite"> Invite Friend from FaceAfeka</button>
+        </div>
+    </div>
+    <div>
+        <script src="/static/Game Logic.js"></script>
+        <div id="players">
+            <h1 id="name"></h1>
+            <p id="waiting"></p>
+        </div>
+    </div>
+    <div id="move">
+        <button onmouseup="stopMove()" onmousedown="moveup()">UP</button>
+        <br>
+        <button onmouseup="stopMove()" onmousedown="moveleft()">LEFT</button>
+        <button onmouseup="stopMove()" onmousedown="moveright()">RIGHT</button>
+        <br>
+        <button onmouseup="stopMove()" onmousedown="movedown()">DOWN</button>
+    </div>
+</body>
+
+</html>
