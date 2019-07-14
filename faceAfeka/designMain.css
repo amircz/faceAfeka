@@ -1,0 +1,166 @@
+@CHARSET "windows-1255";
+
+#header{
+background:green;
+height:65px;
+width:100%;
+position:fixed;
+top:0;
+left:0;	
+z-index:999999;
+}
+
+#posts{
+	height:75px;
+	width:500px;
+	left:0;	
+}
+
+#imagedes{
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.scroller{
+	top: 70px;
+	position: fixed;
+	height: 95%;
+	width: 100%;	
+	overflow: scroll;
+	background: #fefefd; /* Old browsers */
+	background: -moz-linear-gradient(top, #fefefd 0%, #dce3c4 42%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #fefefd 0%,#dce3c4 42%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #fefefd 0%,#dce3c4 42%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefd', endColorstr='#dce3c4',GradientType=0 ); /* IE6-9 */
+}
+
+.postsList{
+	width: 50%;
+  	margin: 0 auto;
+}
+
+.exposeDiv{
+	float:left;
+	width:100%;
+	overflow-y: auto;
+	height: 150px;
+}
+
+.container {
+    position:relative;
+    width: 300px;
+    height: 100px;
+    border: 1px solid #ddd;
+}
+
+.table-content{
+	border-color: #008000;
+	background-color: white;
+}
+
+a.hideLikes{
+	position: relative;
+	z-index: 9999;
+}
+
+a.hideLikes:HOVER{
+	z-index: 9999999;
+}
+
+a.hideLikes span.showHideLikes{
+	display: none;
+}
+
+a.hideLikes:hover span.showHideLikes
+{
+	display: block;
+	position: absolute;
+	font-size: 18px;
+	line-height: 25px;
+	top: 2px;
+	right: 40px;
+	width: 100px;
+	padding: 10px;
+	border: 1px solid #666666;
+	background-color: #c0cedd;
+	text-align: left;
+}
+
+textarea {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.fill-form-font{        
+    padding: 8px;
+    border-color: green;
+    border-style:solid;
+    outline: none;
+    font-size: 16px;
+}
+
+form {
+ width: 100%;
+ margin-left: auto;
+ margin-right: auto;
+ display: inline-block;
+}
+
+#display{
+	width:250px;
+	display:none;
+	top: 65px;
+	float:left; margin-left:130px;
+	border-left:solid 1px #dedede;
+	border-right:solid 1px #dedede;
+	border-bottom:solid 1px #dedede;
+	overflow:hidden;
+	position:absolute;
+	z-index:99999999999999;
+	background-color: #F8F8FF;
+}
+.display_box{
+	padding:4px; border-top:solid 1px #dedede; font-size:12px; height:30px;
+}
+
+.display_box:hover{
+	background:#3b5998;
+	color:#FFFFFF;
+}
+#shade{
+	background-color:#00CCFF;
+}
+
+.button{
+    border: 1px solid #CAD4E7;
+	text-decoration: none;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	padding: 2px 3px 2px 2px;
+	margin-right: 5px;
+	background: url("images/loca.png");
+	color: #3B5998;
+	display: block;
+	width: 12px;
+	height: 12px;
+	margin-right: 1px;
+	margin-top: 1px;
+	margin-bottom: 1px;
+	margin-left: 2px;
+}
+
+
+#hide{
+	display:none;
+}
+
+#exposeDiv{
+	display:none;
+}
+
+button.like{
+	background-image: url("images/like.png");
+}
