@@ -94,6 +94,43 @@ function component(width, height, color, x, y, type) {
         }
 }
 
+function connectToFacebook(){
+    var account=document.getElementById("facebookName");
+    var combo=document.getElementById("friends");
+    var opt=document.createElement("option");
+
+    // $.get("localhost:5000/users/"+account.value,function(response){
+    //     console.log(response);
+    // });
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", "localhost:5000/users/"+account.value, true ); // false for synchronous request
+    xmlHttp.setRequestHeader("Content-Type", "application/json");
+    xmlHttp.send(null);
+    var result =  xmlHttp.responseText;
+    console.log(result);
+    // $.get({
+    //     headers: {
+    //         "Access-Control-Request-Headers": "x-requested-with",
+    //         "Access-Control-Allow-Headers": "*",
+    //         "Access-Control-Allow-Headers": "x-requested-with" 
+
+    //     },
+    //     url : "localhost:5000/users/"+account.value,
+    //     success : function(result){
+    //         console.log(JSON.stringify(result));
+    //     },
+    //     error:function(err){
+    //         console.log(err);
+    //     }
+    // })
+
+
+
+
+    opt.innerHTML=account.value;
+    combo.appendChild(opt);
+}
+
 function getReady() {
     parent = document.getElementById("info");
     var child = document.getElementById("input");

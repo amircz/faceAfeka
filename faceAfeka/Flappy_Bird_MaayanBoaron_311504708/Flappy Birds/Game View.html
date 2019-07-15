@@ -3,7 +3,6 @@
 
 <head>
     <title>Multiplayer Flappy Bird</title>
-    <script src="/socket.io/socket.io.js"></script>
     <style>
         canvas {
             border: 1px solid #d3d3d3;
@@ -20,11 +19,13 @@
             <button id="accept" onclick="getReady()">OK</button>
             <br>
             <br>
-            <button id="invite"> Invite Friend from FaceAfeka</button>
+            <input type="text" id="facebookName" autocomplete="on">
+            <button id="connect" onclick="connectToFacebook()"> connect to facebook</button>
+            <br>
+            <select id="friends"></select>
         </div>
     </div>
     <div>
-        <script src="/static/Game Logic.js"></script>
         <div id="players">
             <h1 id="name"></h1>
             <p id="waiting"></p>
@@ -38,6 +39,9 @@
         <br>
         <button onmouseup="stopMove()" onmousedown="movedown()">DOWN</button>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/static/Game Logic.js"></script>
 </body>
 
 </html>

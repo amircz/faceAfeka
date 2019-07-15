@@ -2,6 +2,8 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var socketIO = require('socket.io');
+const db_utils = require('./demo_db_connection');
+// var cors = require('cors');
 var app = express();
 var server = http.Server(app);
 var io = socketIO(server);
@@ -11,8 +13,16 @@ var num_of_players = 0;
 var num_of_players_finish = 0;
 app.set('port', 5000);
 app.use('/static', express.static(__dirname + '/static'));
+// app.use(cors);
 app.get('/', function (request, response) {
     response.sendFile(path.join(__dirname, 'Game View.html'));
+});
+
+app.get("/users/:userName",function(request,response){
+    var comboBoxDetails = db_utils.getFriendsByUserName(request.params.userName);
+    console.log("comboBoxDetails = " +comboBoxDetails)
+    // response.send(comboBoxDetails);
+    return comboBoxDetails;
 });
 
 io.on("connection", socket => {
