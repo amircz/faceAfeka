@@ -10,7 +10,9 @@ var con = mysql.createConnection({
 exports.getFriendsByUserName =  function(username){
     var friends = [];
     var userId;
+    
     var comboBoxDetails = [];
+    
     con.connect(function(err) {
         if (err) throw err;
         con.query("SELECT user_id FROM users WHERE username='" + username + "'", function (err, result, fields) {
@@ -28,12 +30,11 @@ exports.getFriendsByUserName =  function(username){
                                 else{
                                     console.log("result = " + JSON.stringify(result));
                                     comboBoxDetails.push(result[0].username);
+                                    console.log("comboBoxDetails = " + comboBoxDetails);
                                 }
                             });
 
-                        })
-                        return comboBoxDetails;
-                        
+                        });
                         // async.map(result,(friend) => {})
                         // con.query('SELECT username FROM users WHERE user_id=' + , function (err, result, fields) {});
                     }
@@ -44,8 +45,14 @@ exports.getFriendsByUserName =  function(username){
 }
 
 // con.connect(function(err) {
+//   var friends;
 //   if (err) throw err;
-//   con.query("SELECT user_id FROM users WHERE username="+, function (err, result, fields) {
+//   con.query("SELECT user_id FROM users WHERE username=", function (err, result, fields) {
+//     if (err) throw err;
+//     let friends = result;
+//     console.log(result);
+//   });
+//   con.query("SELECT user_id FROM users WHERE username=", function (err, result, fields) {
 //     if (err) throw err;
 //     console.log(result);
 //   });

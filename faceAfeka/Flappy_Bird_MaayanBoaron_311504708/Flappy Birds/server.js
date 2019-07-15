@@ -13,16 +13,67 @@ var num_of_players = 0;
 var num_of_players_finish = 0;
 app.set('port', 5000);
 app.use('/static', express.static(__dirname + '/static'));
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
+var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  database: "faceAfeka"
+});
+
 // app.use(cors);
 app.get('/', function (request, response) {
     response.sendFile(path.join(__dirname, 'Game View.html'));
 });
 
 app.get("/users/:userName",function(request,response){
-    var comboBoxDetails = db_utils.getFriendsByUserName(request.params.userName);
-    console.log("comboBoxDetails = " +comboBoxDetails)
-    // response.send(comboBoxDetails);
-    return comboBoxDetails;
+    var userId;
+    console.log("request.params.userName = " + request.params.userName);
+    con.connect(function(err) {
+        if (err) throw err;
+        con.query("SELECT user_id FROM users WHERE username='" + request.params.userName + "'", function (err, result, fields) {
+            if (err) throw err;
+            else{
+                userId = result[0].user_id;
+                con.query('SELECT following_user FROM friends WHERE followed_user=' + userId, function (err, result, fields) {
+                    if (err) throw err;
+                    else{
+                        var friendsId = [];
+                        result.map((friend) => {
+                            var friendId = friend.following_user;
+                            friendsId.push('"' + friendId + '"');
+                            // friends.push();
+                        });
+                        con.query('SELECT username FROM users WHERE user_id IN (' + friendsId.join(',') + ')', function (err, result, fields) {
+                            if (err) throw err;
+                            else{
+                                var comboBoxDetails = [];
+                                result.map((friend) => {
+                                    var friendUsername = friend.username;
+                                    comboBoxDetails.push(friendUsername);
+                                });
+                                response.send(comboBoxDetails);
+                            }
+                        });
+                        
+                        // async.map(result,(friend) => {})
+                        // con.query('SELECT username FROM users WHERE user_id=' + , function (err, result, fields) {});
+                    }
+                });
+            }
+        });
+      });  
+
+    // var comboBoxDetails = db_utils.getFriendsByUserName(request.params.userName);
+    // console.log("comboBoxDetails = " +comboBoxDetails);
+    
+    // return comboBoxDetails;
 });
 
 io.on("connection", socket => {
