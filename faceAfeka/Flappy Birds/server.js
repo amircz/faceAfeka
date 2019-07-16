@@ -11,6 +11,8 @@ var players = [];
 let colors = ["red", "blue", "pink"];
 var num_of_players = 0;
 var num_of_players_finish = 0;
+var nodemailer = require('nodemailer');
+
 app.set('port', 5000);
 app.use('/static', express.static(__dirname + '/static'));
 app.use(function (req, res, next) {
@@ -18,6 +20,8 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+
+//var selected_option_value = oSelectOne.options[index].value;
 
 var mysql = require('mysql');
 
@@ -27,9 +31,34 @@ var con = mysql.createConnection({
   database: "faceAfeka"
 });
 
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'faceafeka1@gmail.com',
+      pass: 'afeka2016'
+    }
+  });
+
 // app.use(cors);
 app.get('/', function (request, response) {
     response.sendFile(path.join(__dirname, 'Game View.html'));
+});
+
+app.get("/:mail",function(req, res){
+
+    var mail=req.params.mail;
+    
+    var mailOptions = {
+        from: 'faceafeka1@gmail.com',
+        to: mail,
+        subject: 'Sending Email using Node.js',
+        text: 'Play with me. Go to link: http://localhost:5000'
+      };
+
+    transporter.sendMail(mailOptions, function(err, info){
+        console.log('Email sent: ' + info.response);
+      });
+      res.send("success");
 });
 
 app.get("/users/:userName",function(request,response){
@@ -69,12 +98,14 @@ app.get("/users/:userName",function(request,response){
             }
         });
       });  
-
+      
     // var comboBoxDetails = db_utils.getFriendsByUserName(request.params.userName);
     // console.log("comboBoxDetails = " +comboBoxDetails);
     
     // return comboBoxDetails;
 });
+
+  
 
 io.on("connection", socket => {
     socket.on('new player', function (name) {
@@ -82,8 +113,8 @@ io.on("connection", socket => {
         socket.emit('color', color);
         players[socket.id] = new player(name, color, 0);
         num_of_players++;
-        if (3 - num_of_players > 0) {
-            io.sockets.emit('waiting', 3 - num_of_players)
+        if (2 - num_of_players > 0) {
+            io.sockets.emit('waiting', 2 - num_of_players)
         } else {
             io.sockets.emit('start game');
         }
@@ -93,7 +124,7 @@ io.on("connection", socket => {
     socket.on('end game', points => {
         players[socket.id].score = points;
         num_of_players_finish++
-        if (num_of_players_finish == 3) {
+        if (num_of_players_finish == 2) {
             var list = [];
             for (var key in players) {
                 list.push(players[key]);

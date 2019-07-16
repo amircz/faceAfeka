@@ -1,7 +1,7 @@
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
-  host: "localhost",
+  host: "localhost ",
   user: "root",
   database: "faceAfeka"
 });
@@ -30,6 +30,7 @@ exports.getFriendsByUserName =  function(username){
                                 else{
                                     console.log("result = " + JSON.stringify(result));
                                     comboBoxDetails.push(result[0].username);
+                                    comboBoxDetails.push("zafrir.freits@gmail.com")
                                     console.log("comboBoxDetails = " + comboBoxDetails);
                                 }
                             });

@@ -94,6 +94,17 @@ function component(width, height, color, x, y, type) {
         }
 }
 
+function sendAnEmail(){
+    var comboBox = document.getElementById("friends");
+    var index = comboBox.selectedIndex;
+    var selected_option_value = comboBox.options[index].value;
+    console.log(selected_option_value);
+
+    $.get("http://localhost:5000/"+selected_option_value,function(response){
+        console.log(response);
+    });
+}
+
 function connectToFacebook(){
     var account=document.getElementById("facebookName");
     var combo=document.getElementById("friends");
