@@ -9,10 +9,12 @@
             background-color: #f1f1f1;
         }
     </style>
+ 
 </head>
 
 <body onload="startGame()">
     <div id="info">
+       
         <div id="input">
             <p color="red">Enter your name</p>
             <input type="text" id="name">
@@ -27,6 +29,7 @@
             <br>
             <button id="emailButton" onclick="sendAnEmail()"> send an Email</button>
         </div>
+    
     </div>
     <div>
         <div id="players">
@@ -35,7 +38,7 @@
         </div>
     </div>
     <div id="move">
-        <button onmouseup="stopMove()" onmousedown="moveup()">UP</button>
+        <button onmouseup="stopMove()" onmousedown="moveup()" >UP</button>
         <br>
         <button onmouseup="stopMove()" onmousedown="moveleft()">LEFT</button>
         <button onmouseup="stopMove()" onmousedown="moveright()">RIGHT</button>

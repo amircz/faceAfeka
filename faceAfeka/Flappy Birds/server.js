@@ -56,7 +56,7 @@ app.get("/:mail",function(req, res){
       };
 
     transporter.sendMail(mailOptions, function(err, info){
-        console.log('Email sent: ' + info.response);
+     //   console.log('Email sent: ' + info.response);
       });
       res.send("success");
 });
