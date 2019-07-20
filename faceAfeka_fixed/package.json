@@ -1,0 +1,21 @@
+{
+  "name": "twitbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fetch-image": "^1.0.4",
+    "google-image-search": "^0.1.0",
+    "google-images": "^2.1.0",
+    "jimp": "^0.2.28",
+    "mysql": "^2.14.1",
+    "path": "^0.12.7",
+    "twit": "^2.2.5",
+    "watson-developer-cloud": "^2.37.0"
+  }
+}
